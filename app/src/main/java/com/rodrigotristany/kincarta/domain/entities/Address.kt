@@ -6,4 +6,6 @@ class Address(
     val state : String?,
     val country : String?,
     val zipCode : Int
-)
+) {
+    val parseCity = "$city, $state $zipCode, $country"
+}

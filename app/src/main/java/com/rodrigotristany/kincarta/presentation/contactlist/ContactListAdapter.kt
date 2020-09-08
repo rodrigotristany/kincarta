@@ -2,7 +2,6 @@ package com.rodrigotristany.kincarta.presentation.contactlist
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.rodrigotristany.kincarta.R
 import com.rodrigotristany.kincarta.domain.entities.Contact

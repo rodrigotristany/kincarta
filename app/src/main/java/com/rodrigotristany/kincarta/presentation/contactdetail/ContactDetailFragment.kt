@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rodrigotristany.kincarta.R
-import com.rodrigotristany.kincarta.presentation.contactlist.ContactListActivity
-import com.rodrigotristany.kincarta.presentation.contactlist.ContactListViewModel
 import javax.inject.Inject
 
 class ContactDetailFragment : Fragment() {
