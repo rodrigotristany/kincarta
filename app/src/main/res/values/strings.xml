@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Kin+Carta</string>
+    <string name="star_emoji">⭐</string>
+    <string name="empty_list">There are no contacts in the source</string>
 </resources>

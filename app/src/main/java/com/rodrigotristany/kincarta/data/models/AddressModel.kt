@@ -1,18 +1,24 @@
 package com.rodrigotristany.kincarta.data.models
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.rodrigotristany.kincarta.domain.entities.Address
 
 data class AddressModel (
     @SerializedName("street")
-    val street : String,
+    @Expose
+    val street : String?,
     @SerializedName("city")
-    val city : String,
+    @Expose
+    val city : String?,
     @SerializedName("state")
-    val state : String,
+    @Expose
+    val state : String?,
     @SerializedName("country")
-    val country : String,
+    @Expose
+    val country : String?,
     @SerializedName("zipCode")
+    @Expose
     val zipCode : Int
 ) {
     fun toEntity() = Address(

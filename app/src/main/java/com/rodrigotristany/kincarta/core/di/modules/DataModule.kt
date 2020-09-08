@@ -1,7 +1,12 @@
-package com.rodrigotristany.kincarta.di.modules
+package com.rodrigotristany.kincarta.core.di.modules
 
+import com.google.gson.GsonBuilder
+import com.google.gson.internal.GsonBuildConfig
 import com.rodrigotristany.kincarta.data.api.ContactsApi
 import com.rodrigotristany.kincarta.data.api.ContactsProvider
+import com.rodrigotristany.kincarta.data.mapper.AddressDeserializer
+import com.rodrigotristany.kincarta.data.mapper.ContactDeserializer
+import com.rodrigotristany.kincarta.data.mapper.PhoneDeserializer
 import com.rodrigotristany.kincarta.domain.repositories.ContactsRepository
 import dagger.Module
 import dagger.Provides
@@ -39,6 +44,10 @@ class DataModule{
     @Provides
     @Singleton
     fun provideRetrofit(baseUrl: String, client: OkHttpClient) : Retrofit {
+        var contactDeserializer = GsonBuilder()
+            .registerTypeAdapter(ContactDeserializer::class.java, ContactDeserializer())
+            .create()
+
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)

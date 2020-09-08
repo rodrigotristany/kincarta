@@ -1,29 +1,72 @@
 package com.rodrigotristany.kincarta.domain.usecases.base
 
-import io.reactivex.Scheduler
-import io.reactivex.Single
-import io.reactivex.SingleObserver
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
+import com.rodrigotristany.kincarta.data.mapper.ApiErrorMapper
+import com.rodrigotristany.kincarta.domain.models.ErrorModel
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-abstract class UseCase<T, in Params>(private val subscribeScheduler: Scheduler,
-                                     private val postExecutionScheduler: Scheduler
-) {
+typealias CompletionBlock<T> = UseCase.Request<T>.() -> Unit
 
-    private val disposables: CompositeDisposable = CompositeDisposable()
+abstract class UseCase<T>(private val errorUtil: ApiErrorMapper) {
 
-    abstract fun buildUseCaseSingle(params: Params?): Single<T>
+    private var parentJob: Job = Job()
+    var backgroundContext: CoroutineContext = Dispatchers.IO
+    var foregroundContext: CoroutineContext = Dispatchers.Main
 
-    fun execute(observer: SingleObserver<T>, params: Params? = null) {
-        val single: Single<T> = this.buildUseCaseSingle(params)
-            .subscribeOn(subscribeScheduler)
-            .observeOn(postExecutionScheduler)
-        (single.subscribeWith(observer) as? Disposable)?.let {
-            disposables.add(it)
+    protected abstract suspend fun executeOnBackground(): T
+
+    fun execute(block: CompletionBlock<T>) {
+        val response = Request<T>().apply { block() }
+        unsubscribe()
+        parentJob = Job()
+        CoroutineScope(foregroundContext + parentJob).launch {
+            try {
+                val result = withContext(backgroundContext) {
+                    executeOnBackground()
+                }
+                response(result)
+            } catch (cancellationException: CancellationException) {
+                response(cancellationException)
+            } catch (e: Exception) {
+                response(errorUtil.mapToDomainErrorException(e))
+            }
         }
     }
 
-    fun dispose() {
-        disposables.clear()
+    fun unsubscribe() {
+        parentJob.apply {
+            cancelChildren()
+            cancel()
+        }
+    }
+
+    class Request<T> {
+        private var onComplete: ((T) -> Unit)? = null
+        private var onError: ((ErrorModel) -> Unit)? = null
+        private var onCancel: ((CancellationException) -> Unit)? = null
+
+        fun onComplete(block: (T) -> Unit) {
+            onComplete = block
+        }
+
+        fun onError(block: (ErrorModel) -> Unit) {
+            onError = block
+        }
+
+        fun onCancel(block: (CancellationException) -> Unit) {
+            onCancel = block
+        }
+
+        operator fun invoke(result: T) {
+            onComplete?.invoke(result)
+        }
+
+        operator fun invoke(error: ErrorModel) {
+            onError?.invoke(error)
+        }
+
+        operator fun invoke(error: CancellationException) {
+            onCancel?.invoke(error)
+        }
     }
 }

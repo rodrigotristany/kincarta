@@ -1,12 +1,15 @@
-package com.rodrigotristany.kincarta.presentation.contacdetail
+package com.rodrigotristany.kincarta.presentation.contactdetail
 
-import androidx.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rodrigotristany.kincarta.R
+import com.rodrigotristany.kincarta.presentation.contactlist.ContactListActivity
+import com.rodrigotristany.kincarta.presentation.contactlist.ContactListViewModel
+import javax.inject.Inject
 
 class ContactDetailFragment : Fragment() {
 
@@ -14,19 +17,19 @@ class ContactDetailFragment : Fragment() {
         fun newInstance() = ContactDetailFragment()
     }
 
-    private lateinit var viewModel: ContactDetailViewModel
+    @Inject
+    lateinit var viewModel: ContactDetailViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as ContactDetailActivity).contactDetailComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_contact_detail, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ContactDetailViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

@@ -1,28 +1,39 @@
 package com.rodrigotristany.kincarta.data.models
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.rodrigotristany.kincarta.domain.entities.Contact
 
 data class ContactModel(
     @SerializedName("name")
-    val name : String,
+    @Expose
+    val name : String?,
     @SerializedName("id")
+    @Expose
     val id : Int,
     @SerializedName("companyName")
-    val companyName : String,
+    @Expose
+    val companyName : String?,
     @SerializedName("isFavorite")
+    @Expose
     val isFavorite : Boolean,
     @SerializedName("smallImageURL")
-    val smallImageURL : String,
+    @Expose
+    val smallImageURL : String?,
     @SerializedName("largeImageURL")
-    val largeImageURL : String,
+    @Expose
+    val largeImageURL : String?,
     @SerializedName("emailAddress")
-    val emailAddress : String,
+    @Expose
+    val emailAddress : String?,
     @SerializedName("birthdate")
-    val birthDate : String,
+    @Expose
+    val birthDate : String?,
     @SerializedName("phone")
+    @Expose
     val phone : PhoneModel,
     @SerializedName("address")
+    @Expose
     val address : AddressModel
 ) {
     fun toEntity() = Contact(
