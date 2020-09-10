@@ -1,8 +1,7 @@
-package com.rodrigotristany.kincarta.presentation.contactlist
+package com.rodrigotristany.kincarta.presentation.main
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.rodrigotristany.kincarta.domain.entities.Contact
 import com.rodrigotristany.kincarta.domain.models.ErrorModel
@@ -10,7 +9,7 @@ import com.rodrigotristany.kincarta.domain.usecases.GetContactsUseCase
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactInfo
 import javax.inject.Inject
 
-class ContactListViewModel
+class MainViewModel
 @Inject constructor(
     private val getContactsUseCase: GetContactsUseCase) : ViewModel() {
 

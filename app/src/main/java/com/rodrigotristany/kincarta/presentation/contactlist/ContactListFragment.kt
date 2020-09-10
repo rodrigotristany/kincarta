@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rodrigotristany.kincarta.R
 import com.rodrigotristany.kincarta.domain.entities.Contact
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactDetailModel
+import com.rodrigotristany.kincarta.presentation.main.MainViewModel
 import com.rodrigotristany.kincarta.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_contact_list.*
 import javax.inject.Inject
@@ -26,7 +27,7 @@ class ContactListFragment : Fragment() {
 
     @Inject
     @Singleton
-    lateinit var viewModel: ContactListViewModel
+    lateinit var viewModel: MainViewModel
 
     private val adapter : ContactListAdapter by lazy { ContactListAdapter(mutableListOf()){ item -> onItemClicked(item) } }
 
