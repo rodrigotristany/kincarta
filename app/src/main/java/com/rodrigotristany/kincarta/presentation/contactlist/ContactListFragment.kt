@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -29,7 +30,11 @@ class ContactListFragment : Fragment() {
 
     private fun onItemClicked(item: Contact) {
         var contactDetailModel = ContactDetailModel.createFromContact(item)
-        Navigation.createNavigateOnClickListener(R.id.next_action, null).onClick(this.view)
+        val bundle = bundleOf(
+            "contactArg" to item,
+            "contactInfoArg" to contactDetailModel
+        )
+        Navigation.createNavigateOnClickListener(R.id.next_action, bundle).onClick(this.view)
     }
 
     override fun onAttach(context: Context) {

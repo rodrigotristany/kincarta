@@ -27,6 +27,14 @@
         android:label="@string/contact_detail_text"
         tools:layout="@layout/fragment_contact_detail">
 
+        <argument
+            android:name="contactArg"
+            app:argType="com.rodrigotristany.kincarta.domain.entities.Contact"/>
+
+        <argument
+            android:name="contactInfoArg"
+            app:argType="com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactDetailModel"/>
+
         <action
             android:id="@+id/next_action"
             app:enterAnim="@anim/slide_in_right"

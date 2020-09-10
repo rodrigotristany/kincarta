@@ -1,5 +1,7 @@
 package com.rodrigotristany.kincarta.domain.entities
 
+import java.io.Serializable
+
 class Contact (
     val name : String?,
     val id : Int,
@@ -11,4 +13,4 @@ class Contact (
     val birthDate : String?,
     val phone : Phone,
     val address : Address
-)
+) : Serializable

@@ -1,8 +1,10 @@
 package com.rodrigotristany.kincarta.presentation.contactdetail.models
 
+import com.google.gson.annotations.SerializedName
 import com.rodrigotristany.kincarta.domain.entities.Contact
+import java.io.Serializable
 
-class ContactDetailModel {
+class ContactDetailModel : Serializable {
     companion object {
         const val PHONE = 1
         const val ADDRESS = 2
@@ -36,6 +38,7 @@ class ContactDetailModel {
         }
     }
 
+    @SerializedName("modelList")
     var modelList: ArrayList<ContactInfo> = arrayListOf()
 
 }

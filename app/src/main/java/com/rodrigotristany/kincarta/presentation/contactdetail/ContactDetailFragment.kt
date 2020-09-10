@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.rodrigotristany.kincarta.R
 import com.rodrigotristany.kincarta.domain.entities.Contact
+import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactDetailModel
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactInfo
 import com.rodrigotristany.kincarta.presentation.contactlist.ContactListActivity
 import com.squareup.picasso.Picasso
@@ -32,6 +33,14 @@ class ContactDetailFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity as ContactListActivity).contactListComponent.inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        var contactDetailModel = arguments?.getSerializable("contactInfoArg")
+        var contact = arguments?.getSerializable("contactArg")
+        viewModel.contactInfo.value = (contactDetailModel as ContactDetailModel).modelList
+        viewModel.contact.value = (contact as Contact)
     }
 
     override fun onCreateView(
