@@ -14,7 +14,7 @@ class ContactListAdapter(private val contacts: MutableList<Contact>, val listene
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val contactName = itemView.contact_name
-        private val contactInfo = itemView.contact_info
+        private val contactInfo = itemView.contact_company
         private val isFavorite = itemView.is_favorite
         private val contactThumb = itemView.thumbnail
 

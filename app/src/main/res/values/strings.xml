@@ -2,4 +2,6 @@
     <string name="app_name">Kin+Carta</string>
     <string name="star_emoji">⭐</string>
     <string name="empty_list">There are no contacts in the source</string>
+    <string name="contact_detail_text">Contact Detail</string>
+    <string name="contact_list_text">Contact List</string>
 </resources>

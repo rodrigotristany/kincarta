@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.rodrigotristany.kincarta.R
@@ -28,6 +29,7 @@ class ContactListFragment : Fragment() {
 
     private fun onItemClicked(item: Contact) {
         var contactDetailModel = ContactDetailModel.createFromContact(item)
+        Navigation.createNavigateOnClickListener(R.id.next_action, null).onClick(this.view)
     }
 
     override fun onAttach(context: Context) {

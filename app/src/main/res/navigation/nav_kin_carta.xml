@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/contact_list"
+    android:id="@+id/nav_kin_carta">
+
+    <fragment
+        android:id="@+id/contact_list"
+        android:name="com.rodrigotristany.kincarta.presentation.contactlist.ContactListFragment"
+        android:label="@string/contact_list_text"
+        tools:layout="@layout/fragment_contact_list">
+
+        <action
+            android:id="@+id/next_action"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:destination="@id/contact_detail">
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/contact_detail"
+        android:name="com.rodrigotristany.kincarta.presentation.contactdetail.ContactDetailFragment"
+        android:label="@string/contact_detail_text"
+        tools:layout="@layout/fragment_contact_detail">
+
+        <action
+            android:id="@+id/next_action"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popUpTo="@id/contact_list">
+        </action>
+
+    </fragment>
+
+</navigation>

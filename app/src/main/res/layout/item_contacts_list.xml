@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="@id/thumbnail" />
 
             <TextView
-                android:id="@+id/contact_info"
+                android:id="@+id/contact_company"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

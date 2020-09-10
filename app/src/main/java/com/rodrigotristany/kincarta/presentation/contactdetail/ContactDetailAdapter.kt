@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rodrigotristany.kincarta.R
 import com.rodrigotristany.kincarta.core.extensions.inflate
+import com.rodrigotristany.kincarta.domain.entities.Contact
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactDetailModel
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactInfo
 import kotlinx.android.synthetic.main.item_contacts_detail.view.*
@@ -68,5 +69,15 @@ class ContactDetailAdapter(private val contactInfoList: ArrayList<ContactInfo>):
 
     override fun getItemViewType(position: Int): Int {
         return contactInfoList[position].type
+    }
+
+    fun add(list: MutableList<ContactInfo>) {
+        contactInfoList.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun clear() {
+        contactInfoList.clear()
+        notifyDataSetChanged()
     }
 }
