@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.rodrigotristany.kincarta.R
 import com.rodrigotristany.kincarta.domain.entities.Contact
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactDetailModel
+import com.rodrigotristany.kincarta.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_contact_list.*
 import javax.inject.Inject
 
@@ -39,7 +39,7 @@ class ContactListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as ContactListActivity).contactListComponent.inject(this)
+        (activity as MainActivity).mainComponent.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,24 +49,32 @@ class ContactListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRecyclerView()
         with(viewModel) {
-            listContacts.observe(viewLifecycleOwner, Observer { initView(it) })
-            error.observe(viewLifecycleOwner, Observer { message.text = "${it?.message}" })
+            listContacts.observe(viewLifecycleOwner, { initView(it) })
+            error.observe(viewLifecycleOwner, { message.text = "${it?.message}" })
         }
     }
 
-    private fun initView(it: MutableList<Contact>) {
+    private fun setRecyclerView() {
         rv_contacts_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
             context, RecyclerView.VERTICAL, false)
         rv_contacts_list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         rv_contacts_list.adapter = adapter
+    }
+
+    private fun initView(it: List<Contact>) {
         if (it.isNotEmpty()) {
-            adapter.clear()
-            adapter.add(it)
+            fillRecyclerView(it)
             message.text = ""
         }
         else{
             message.text = context?.getString(R.string.empty_list)
         }
+    }
+
+    private fun fillRecyclerView(it: List<Contact>) {
+        adapter.clear()
+        adapter.add(it.sortedBy { it.name }.sortedBy { !it.isFavorite }.toMutableList())
     }
 }

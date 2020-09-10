@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.rodrigotristany.kincarta.core.App
 import com.rodrigotristany.kincarta.R
 import com.rodrigotristany.kincarta.presentation.contactdetail.di.ContactDetailComponent
-import com.rodrigotristany.kincarta.presentation.contactlist.di.ContactListComponent
 
 class ContactDetailActivity : AppCompatActivity() {
 

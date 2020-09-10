@@ -11,7 +11,7 @@ class ContactListViewModel
 @Inject constructor(
     private val getContactsUseCase: GetContactsUseCase) : ViewModel() {
 
-    val listContacts: MutableLiveData<MutableList<Contact>> by lazy { MutableLiveData<MutableList<Contact>>() }
+    val listContacts: MutableLiveData<List<Contact>> by lazy { MutableLiveData<List<Contact>>() }
     val error : MutableLiveData<ErrorModel> by lazy { MutableLiveData<ErrorModel>() }
 
     init {

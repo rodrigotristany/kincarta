@@ -8,9 +8,6 @@ import javax.inject.Inject
 
 class GetContactsUseCase
 @Inject constructor(private val contactsRepository: ContactsRepository,
-                    errorHandler: ApiErrorMapper) : UseCase<MutableList<Contact>>(errorHandler){
-    override suspend fun executeOnBackground(): MutableList<Contact> {
-        var contactsModel = contactsRepository.getContacts()
-        return contactsModel.sortedBy { it.name }.sortedBy { !it.isFavorite }.toMutableList()
-    }
+                    errorHandler: ApiErrorMapper) : UseCase<List<Contact>>(errorHandler){
+    override suspend fun executeOnBackground(): List<Contact> = contactsRepository.getContacts()
 }

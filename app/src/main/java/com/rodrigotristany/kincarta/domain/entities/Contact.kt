@@ -6,7 +6,7 @@ class Contact (
     val name : String?,
     val id : Int,
     val companyName : String?,
-    val isFavorite : Boolean,
+    var isFavorite : Boolean,
     val smallImageURL : String?,
     val largeImageURL : String?,
     val emailAddress : String?,
