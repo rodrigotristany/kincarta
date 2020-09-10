@@ -2,7 +2,6 @@ package com.rodrigotristany.kincarta.core.di.components
 
 import android.content.Context
 import com.rodrigotristany.kincarta.core.di.modules.*
-import com.rodrigotristany.kincarta.presentation.contactdetail.di.ContactDetailComponent
 import com.rodrigotristany.kincarta.presentation.main.di.MainComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -22,5 +21,4 @@ interface ApplicationComponent {
     }
 
     fun contactsListComponent(): MainComponent.Factory
-    fun contactDetailComponent(): ContactDetailComponent.Factory
 }

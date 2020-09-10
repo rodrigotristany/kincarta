@@ -12,11 +12,13 @@ import com.rodrigotristany.kincarta.R
 import com.rodrigotristany.kincarta.domain.entities.Contact
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactDetailModel
 import com.rodrigotristany.kincarta.presentation.contactdetail.models.ContactInfo
+import com.rodrigotristany.kincarta.presentation.contactlist.ContactListViewModel
 import com.rodrigotristany.kincarta.presentation.main.MainActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_contact_detail.*
 import java.util.ArrayList
 import javax.inject.Inject
+import javax.inject.Singleton
 
 class ContactDetailFragment : Fragment() {
 
@@ -25,7 +27,8 @@ class ContactDetailFragment : Fragment() {
     }
 
     @Inject
-    lateinit var viewModel: ContactDetailViewModel
+    @Singleton
+    lateinit var viewModel: ContactListViewModel
 
     private val adapter : ContactDetailAdapter by lazy { ContactDetailAdapter(arrayListOf()) }
 
